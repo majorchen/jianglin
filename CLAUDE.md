@@ -22,7 +22,12 @@ jianglin/
 ```
 
 ## 当前阶段
-Phase 1 — 静态小镇：一张固定地图 + 15个NPC精灵站立
+Phase 1 — 静态小镇 ✅ 代码完成，待导出部署
+- ✅ Godot 4.6.3 引擎
+- ✅ 4 套像素素材（Codex 生成）
+- ✅ 主场景（地图 + 3 个 NPC + 镜头控制）
+- ✅ 项目验证通过（--check-only）
+- 🔄 HTML5 导出模板下载中
 
 ## 参考代码
 - 斯坦福小镇: /tmp/generative_agents/
