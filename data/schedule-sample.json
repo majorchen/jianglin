@@ -1,0 +1,61 @@
+{
+  "day": 1,
+  "title": "AI 消失后的第一天",
+  "characters": {
+    "engineer_wang": {
+      "name": "老王",
+      "role": "工程师",
+      "schedule": [
+        {"time": 6, "action": "wake", "location": [380, 280], "text": "发电机又停了……得去看看"},
+        {"time": 7, "action": "walk", "location": [450, 320], "text": "去配电房"},
+        {"time": 8, "action": "work", "location": [540, 340], "text": "这破机器，零件都快锈穿了"},
+        {"time": 12, "action": "walk", "location": [400, 380], "text": "吃午饭"},
+        {"time": 13, "action": "talk", "target": "scientist_li", "text": "小李，你那边有备用电池吗？"},
+        {"time": 14, "action": "reply", "target": "engineer_wang", "text": "没了……最后一块昨天给了医疗站"},
+        {"time": 16, "action": "walk", "location": [380, 280], "text": "天快黑了，回宿舍"},
+        {"time": 20, "action": "sleep", "location": [380, 280], "text": "Zzz..."}
+      ],
+      "memory": [
+        "配电房零件严重老化",
+        "小李说备用电池已经用完了",
+        "昨天北面听到了奇怪的机械声"
+      ]
+    },
+    "scientist_li": {
+      "name": "小李",
+      "role": "科学家",
+      "schedule": [
+        {"time": 6, "action": "wake", "location": [520, 320]},
+        {"time": 7, "action": "work", "location": [550, 350], "text": "分析昨天采集的水样"},
+        {"time": 10, "action": "walk", "location": [480, 400], "text": "去温室检查作物"},
+        {"time": 13, "action": "walk", "location": [400, 380], "text": "吃午饭"},
+        {"time": 14, "action": "reply", "target": "engineer_wang", "text": "没了……最后一块昨天给了医疗站"},
+        {"time": 15, "action": "walk", "location": [520, 320], "text": "回实验室"},
+        {"time": 20, "action": "sleep", "location": [520, 320]}
+      ],
+      "memory": [
+        "水样辐射值在正常范围内",
+        "温室西红柿快熟了",
+        "老王总是来借东西不还"
+      ]
+    },
+    "scavenger_zhang": {
+      "name": "老张",
+      "role": "拾荒者",
+      "schedule": [
+        {"time": 5, "action": "wake", "location": [450, 420]},
+        {"time": 6, "action": "walk", "location": [200, 450], "text": "天刚亮，出去搜寻物资"},
+        {"time": 12, "action": "walk", "location": [450, 420], "text": "今天的收获……几个罐头，一卷电线"},
+        {"time": 13, "action": "walk", "location": [400, 380], "text": "吃午饭"},
+        {"time": 14, "action": "talk", "target": "engineer_wang", "text": "老王，我在北边废墟看到一辆还能用的车"},
+        {"time": 16, "action": "walk", "location": [600, 300], "text": "去瞭望塔值班"},
+        {"time": 20, "action": "sleep", "location": [450, 420]}
+      ],
+      "memory": [
+        "北边废墟有辆旧车，引擎可能还能修",
+        "今天找到的罐头够吃三天",
+        "塔上看到远处有炊烟——可能还有其他幸存者"
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>降临 Jianglin — 社群可视化互动世界</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1a1a2e;overflow:hidden;font-family:"Microsoft YaHei",sans-serif}
+canvas{display:block;image-rendering:pixelated}
+#loading{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);color:#c9a96e;text-align:center;z-index:100;font-size:18px}
+#loadBarWrap{width:200px;height:4px;background:#333;margin:12px auto;border-radius:2px;overflow:hidden}
+#loadBar{width:0;height:100%;background:#c9a96e;transition:width .3s}
+#hud{position:fixed;top:12px;left:50%;transform:translateX(-50%);color:#c9a96e;font-size:14px;z-index:10;text-align:center;pointer-events:none}
+#clock{font-size:22px;font-weight:bold;text-shadow:0 0 10px rgba(0,0,0,.8)}
+#speech{position:fixed;top:45%;left:50%;transform:translate(-50%,-50%);color:#ffe8b0;font-size:15px;z-index:20;pointer-events:none;text-align:center;text-shadow:0 0 10px rgba(0,0,0,.9);opacity:0;transition:opacity .3s;max-width:80vw;line-height:1.5}
+#hint{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);color:#555;font-size:11px;z-index:10}
+</style></head>
+<body>
+<div id="loading"><span id="loadText">加载中 0%</span><div id="loadBarWrap"><div id="loadBar"></div></div></div>
+<div id="hud"><span id="clock">第1天 06:00</span></div>
+<div id="speech"></div>
+<div id="hint">🖱️ 滚轮缩放 · 中键拖拽 · R重置 · +/-调速</div>
+<canvas id="game"></canvas>
+<script src="game.js?v=5"></script>
+</body></html>

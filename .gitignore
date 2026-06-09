@@ -2,3 +2,4 @@ assets/
 .godot/
 *.import
 export/
+godot.exe
