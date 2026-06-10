@@ -1,0 +1,23 @@
+{
+  "name": "降临 Jianglin",
+  "short_name": "Jianglin",
+  "description": "A living pixel colony for mobile web.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#130f0b",
+  "theme_color": "#130f0b",
+  "icons": [
+    {
+      "src": "/index.icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/index.apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -22,12 +22,10 @@ jianglin/
 ```
 
 ## 当前阶段
-Phase 1 — 静态小镇 ✅ 代码完成，待导出部署
-- ✅ Godot 4.6.3 引擎
-- ✅ 4 套像素素材（Codex 生成）
-- ✅ 主场景（地图 + 3 个 NPC + 镜头控制）
-- ✅ 项目验证通过（--check-only）
-- 🔄 HTML5 导出模板下载中
+可运营原型骨架 ✅ 已上线 https://out-pink-xi.vercel.app（Godot Web 导出，主场景 main_hd2d.tscn）
+- ✅ 数据驱动（data/world-state.json）+ 资源/简报/事件/投票/人物卡
+- ✅ /api/vote（无 KV 时本地兜底）+ Runner 雏形（scripts/generate_next_day.py）
+- 🔄 下一步：手机端 UI/HD-2D 升级，完整方案见 `PLAN-mobile-hd2d.md`（P0 UI重构 → P0.5 渲染三件套 → P1 资产管线）
 
 ## 参考代码
 - 斯坦福小镇: /tmp/generative_agents/

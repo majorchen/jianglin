@@ -12,7 +12,7 @@ config_version=5
 config/name="Jianglin"
 config/description="降临——社群可视化互动世界"
 config/version="0.1.0"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/main_hd2d.tscn"
 config/features=PackedStringArray("4.5")
 config/icon="res://assets/ui-elements.png"
 
@@ -21,6 +21,7 @@ renderer/rendering_method="gl_compatibility"
 textures/canvas_textures/default_texture_filter=0
 
 [display]
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=432
+window/size/viewport_height=936
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
