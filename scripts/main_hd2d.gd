@@ -7,8 +7,8 @@ const PATH_TEXTURE := "res://assets_hd2d/terrain/ground_path.png"
 const FONT_PATH := "res://assets_hd2d/fonts/NotoSansSC-Regular.ttf"
 # v2 资产按 48px/世界单位生成；取 2x 密度让现有小镇布局保持宽松
 const PIXELS_PER_UNIT := 96.0
-const MAP_MIN := Vector2(-5.8, -6.8)
-const MAP_MAX := Vector2(5.8, 6.8)
+const MAP_MIN := Vector2(-3.2, -3.6)
+const MAP_MAX := Vector2(3.2, 4.2)
 const BASE_TIME_SPEED := 0.18
 const SHEET_HEIGHT_RATIO := 0.54
 const BUILDING_TEXTURES := {
@@ -505,7 +505,12 @@ func _build_character_sheet(data: Dictionary) -> void:
 	head.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	head.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	var texture_path: String = CHARACTER_TEXTURES.get(data.get("archetype", ""), "")
-	head.texture = load(texture_path)
+	var sheet_tex: Texture2D = load(texture_path)
+	# 只取 4x4 走路图的第 0 帧做头像
+	var atlas := AtlasTexture.new()
+	atlas.atlas = sheet_tex
+	atlas.region = Rect2(0, 0, sheet_tex.get_width() / 4.0, sheet_tex.get_height() / 4.0)
+	head.texture = atlas
 	sheet_body.add_child(head)
 	var meta := _new_label("%s · %s\n需要：%s" % [data.get("role", ""), data.get("mood", ""), data.get("need", "")], 16)
 	meta.add_theme_color_override("font_color", Color(0.95, 0.86, 0.68))
@@ -1045,8 +1050,12 @@ func _light_keyframe(hour: float) -> Dictionary:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if sheet_panel != null and sheet_panel.visible:
-		_close_sheet()
-		get_viewport().set_input_as_handled()
+		# 只在"新的按下"时关闭，否则开 sheet 那次点击的 mouseup 会立刻把它关掉
+		var pressed: bool = (event is InputEventMouseButton and event.pressed) \
+			or (event is InputEventScreenTouch and event.pressed)
+		if pressed:
+			_close_sheet()
+			get_viewport().set_input_as_handled()
 		return
 	if event is InputEventScreenTouch:
 		_handle_touch(event)
@@ -1096,17 +1105,21 @@ func _zoom(delta_size: float) -> void:
 	_clamp_camera()
 
 func _clamp_camera() -> void:
+	# 相机 z 自带 +9.8 注视偏移，边界按"注视点"折算
 	camera.position.x = clamp(camera.position.x, MAP_MIN.x, MAP_MAX.x)
-	camera.position.z = clamp(camera.position.z, MAP_MIN.y, MAP_MAX.y)
+	camera.position.z = clamp(camera.position.z, 9.8 + MAP_MIN.y, 9.8 + MAP_MAX.y)
 
 func _select_world_item(screen_pos: Vector2) -> void:
 	var best_type := ""
 	var best_key := ""
-	var pick_radius := maxf(52.0, get_viewport().get_visible_rect().size.x * 0.13)
+	var pick_radius := maxf(56.0, get_viewport().get_visible_rect().size.x * 0.13)
 	var best_dist := pick_radius
+	# 输入事件坐标在画布空间(432×936拉伸)，unproject 在窗口像素空间——必须换算到同一空间再比距离
+	# 实测（web导出）：输入事件与 unproject 同在画布空间，无需换算
+	var to_canvas := 1.0
 	for key in characters:
 		var sprite: Sprite3D = characters[key]["sprite"]
-		var p := camera.unproject_position(sprite.global_position + Vector3(0, 0.45, 0))
+		var p := camera.unproject_position(sprite.global_position + Vector3(0, 0.45, 0)) * to_canvas
 		var dist := p.distance_to(screen_pos)
 		if dist < best_dist:
 			best_dist = dist
@@ -1114,7 +1127,7 @@ func _select_world_item(screen_pos: Vector2) -> void:
 			best_key = key
 	for key in buildings:
 		var sprite: Sprite3D = buildings[key]["sprite"]
-		var p := camera.unproject_position(sprite.global_position)
+		var p := camera.unproject_position(sprite.global_position) * to_canvas
 		var dist := p.distance_to(screen_pos)
 		if dist < best_dist:
 			best_dist = dist
