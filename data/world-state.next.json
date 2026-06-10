@@ -1,0 +1,357 @@
+{
+  "day": 2,
+  "title": "修复发电机后的第二天",
+  "world": {
+    "weather": "dust",
+    "threat": 35,
+    "resources": {
+      "food": 42,
+      "water": 58,
+      "power": 49,
+      "medicine": 18,
+      "morale": 68
+    },
+    "daily_brief": "老王把旧车线圈接进发电系统，温室重新亮起保温灯。北面废墟的机械声暂时远了。"
+  },
+  "buildings": [
+    {
+      "id": "radio",
+      "name": "广播塔",
+      "type": "signal",
+      "texture": "b0",
+      "position": [
+        -3.25,
+        -2.0
+      ],
+      "scale": 1.45,
+      "status": "信号微弱",
+      "description": "旧时代留下的短波塔。夜里偶尔能收到断续呼救。",
+      "unlocked": true
+    },
+    {
+      "id": "greenhouse",
+      "name": "温室",
+      "type": "food",
+      "texture": "b1",
+      "position": [
+        0.0,
+        -2.25
+      ],
+      "scale": 1.2,
+      "status": "作物稳定",
+      "description": "营地最重要的食物来源，玻璃墙还在漏风。",
+      "unlocked": true
+    },
+    {
+      "id": "bunker",
+      "name": "掩体",
+      "type": "shelter",
+      "texture": "b2",
+      "position": [
+        3.15,
+        -2.0
+      ],
+      "scale": 1.2,
+      "status": "可住 9 人",
+      "description": "混凝土掩体能挡风暴，但通风管道需要清理。",
+      "unlocked": true
+    },
+    {
+      "id": "watch",
+      "name": "瞭望台",
+      "type": "defense",
+      "texture": "b3",
+      "position": [
+        3.0,
+        1.55
+      ],
+      "scale": 1.3,
+      "status": "北面异常",
+      "description": "张叔在这里看见远处有烟，也可能是另一处幸存者据点。",
+      "unlocked": true
+    },
+    {
+      "id": "kitchen",
+      "name": "厨房",
+      "type": "food",
+      "texture": "b4",
+      "position": [
+        -1.1,
+        2.45
+      ],
+      "scale": 1.25,
+      "status": "燃料紧张",
+      "description": "所有人每天都会经过这里。流言和争执也最先在这里发酵。",
+      "unlocked": true
+    }
+  ],
+  "characters": [
+    {
+      "id": "engineer_wang",
+      "name": "老王",
+      "role": "工程师",
+      "archetype": "engineer",
+      "home": [
+        -1.4,
+        1.2
+      ],
+      "mood": "焦躁",
+      "need": "备用线圈",
+      "memory": [
+        "配电房零件严重老化。",
+        "小李说最后一块备用电池昨天给了医疗站。",
+        "北面废墟可能有还能拆的旧车。"
+      ],
+      "schedule": [
+        {
+          "time": 6,
+          "location": [
+            -1.8,
+            2.0
+          ],
+          "text": "老王在检查昨天留下的变化。"
+        },
+        {
+          "time": 8,
+          "location": [
+            1.35,
+            -0.9
+          ],
+          "text": "这破机器还撑得住，但不该再赌了。"
+        },
+        {
+          "time": 12,
+          "location": [
+            -0.15,
+            1.65
+          ],
+          "text": "午饭后去找张叔问旧车的事。"
+        },
+        {
+          "time": 16,
+          "location": [
+            -1.8,
+            2.0
+          ],
+          "text": "天黑前把电路临时接上。"
+        },
+        {
+          "time": 21,
+          "location": [
+            -1.4,
+            1.2
+          ],
+          "text": "老王把今天的事记了下来。"
+        }
+      ]
+    },
+    {
+      "id": "scientist_li",
+      "name": "小李",
+      "role": "生物学家",
+      "archetype": "scientist",
+      "home": [
+        0.25,
+        0.15
+      ],
+      "mood": "克制",
+      "need": "干净水样",
+      "memory": [
+        "水样辐射值仍在正常范围内。",
+        "温室西红柿快熟了。",
+        "老王总是借走她的备用电池不还。"
+      ],
+      "schedule": [
+        {
+          "time": 6,
+          "location": [
+            0.45,
+            -0.25
+          ],
+          "text": "小李在检查昨天留下的变化。"
+        },
+        {
+          "time": 10,
+          "location": [
+            0.15,
+            -1.65
+          ],
+          "text": "温室里出现了新的霉斑。"
+        },
+        {
+          "time": 13,
+          "location": [
+            -0.15,
+            1.65
+          ],
+          "text": "如果今天外出，带回水样比带回罐头更重要。"
+        },
+        {
+          "time": 17,
+          "location": [
+            0.45,
+            -0.25
+          ],
+          "text": "记录完成，作物还能撑三天。"
+        },
+        {
+          "time": 22,
+          "location": [
+            0.25,
+            0.15
+          ],
+          "text": "别让孩子们靠近北墙。"
+        }
+      ]
+    },
+    {
+      "id": "scavenger_zhang",
+      "name": "老张",
+      "role": "拾荒者",
+      "archetype": "scavenger",
+      "home": [
+        -0.35,
+        2.65
+      ],
+      "mood": "警觉",
+      "need": "弹药和绳索",
+      "memory": [
+        "北边废墟里有一辆还能拆的旧车。",
+        "今天找到的罐头够吃三天。",
+        "塔上看见远处有炊烟，可能还有其他幸存者。"
+      ],
+      "schedule": [
+        {
+          "time": 5,
+          "location": [
+            -0.9,
+            2.8
+          ],
+          "text": "天刚亮，出去还能避开风沙。"
+        },
+        {
+          "time": 8,
+          "location": [
+            -3.2,
+            2.4
+          ],
+          "text": "北边废墟有脚印，不像我们的。"
+        },
+        {
+          "time": 12,
+          "location": [
+            -0.15,
+            1.65
+          ],
+          "text": "带回几罐罐头，还有一卷电线。"
+        },
+        {
+          "time": 16,
+          "location": [
+            2.3,
+            0.85
+          ],
+          "text": "瞭望台值班，别让火光暴露我们。"
+        },
+        {
+          "time": 21,
+          "location": [
+            -0.35,
+            2.65
+          ],
+          "text": "老张把今天的事记了下来。"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from": "老王",
+      "to": "小李",
+      "value": 48,
+      "note": "互相信任，但经常争论资源优先级。"
+    },
+    {
+      "from": "老王",
+      "to": "老张",
+      "value": 62,
+      "note": "老张能找到零件，老王负责把它们修好。"
+    },
+    {
+      "from": "小李",
+      "to": "老张",
+      "value": 55,
+      "note": "小李担心老张带回污染物，老张觉得她太谨慎。"
+    }
+  ],
+  "events": [
+    {
+      "hour": 7,
+      "title": "发电机熄火",
+      "text": "营地短暂停电，温室保温灯只剩一半能用。",
+      "impact": {
+        "power": -5,
+        "morale": -2
+      }
+    },
+    {
+      "hour": 12,
+      "title": "午饭争执",
+      "text": "食物还够，但所有人都知道罐头开一罐少一罐。",
+      "impact": {
+        "food": -3,
+        "morale": -1
+      }
+    },
+    {
+      "hour": 18,
+      "title": "远处炊烟",
+      "text": "瞭望台发现北面有烟。它可能意味着同伴，也可能意味着麻烦。",
+      "impact": {
+        "threat": 6,
+        "morale": 2
+      }
+    }
+  ],
+  "votes": {
+    "question": "明天优先做什么？",
+    "options": [
+      {
+        "id": "repair_power",
+        "label": "修发电机",
+        "description": "提高电力，降低温室风险。",
+        "impact": {
+          "power": 16,
+          "morale": 3,
+          "threat": -2
+        }
+      },
+      {
+        "id": "scavenge_north",
+        "label": "北面搜寻",
+        "description": "可能获得物资，但危险上升。",
+        "impact": {
+          "food": 9,
+          "medicine": 4,
+          "threat": 8
+        }
+      },
+      {
+        "id": "tend_wounded",
+        "label": "照顾伤员",
+        "description": "消耗药品，提高士气。",
+        "impact": {
+          "medicine": -5,
+          "morale": 13,
+          "threat": -1
+        }
+      }
+    ]
+  },
+  "history": [
+    "第 0 天：最后一条云端广播停止。",
+    "第 1 天：营地把旧温室改成食物来源。",
+    "第 2 天：投票选择修发电机，营地电力恢复了一截。"
+  ],
+  "generated_at": "2026-06-10T13:39:52Z"
+}

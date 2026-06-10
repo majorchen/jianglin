@@ -1,11 +1,12 @@
 extends Node3D
 
 const WORLD_STATE_PATH := "res://data/world-state.json"
-const GROUND_TEXTURE := "res://assets_hd2d/terrain/ground-tiles.png"
-const GROUND_TEXTURE_2 := "res://assets_hd2d/terrain/ground-tiles.png"
-const PATH_TEXTURE := "res://assets_hd2d/terrain/ground-tiles.png"
+const GROUND_TEXTURE := "res://assets_hd2d/terrain/ground_dirt.png"
+const GROUND_TEXTURE_2 := "res://assets_hd2d/terrain/ground_rocky.png"
+const PATH_TEXTURE := "res://assets_hd2d/terrain/ground_path.png"
 const FONT_PATH := "res://assets_hd2d/fonts/NotoSansSC-Regular.ttf"
-const PIXELS_PER_UNIT := 48.0
+# v2 资产按 48px/世界单位生成；取 2x 密度让现有小镇布局保持宽松
+const PIXELS_PER_UNIT := 96.0
 const MAP_MIN := Vector2(-5.8, -6.8)
 const MAP_MAX := Vector2(5.8, 6.8)
 const BASE_TIME_SPEED := 0.18
@@ -21,6 +22,16 @@ const CHARACTER_TEXTURES := {
 	"engineer": "res://assets_hd2d/characters/engineer_walk_sheet.png",
 	"scientist": "res://assets_hd2d/characters/scientist_walk_sheet.png",
 	"scavenger": "res://assets_hd2d/characters/scavenger_walk_sheet.png",
+}
+const PROP_TEXTURES := {
+	"barrel": "res://assets_hd2d/props/barrel.png",
+	"crates": "res://assets_hd2d/props/crates.png",
+	"campfire": "res://assets_hd2d/props/campfire.png",
+	"fence": "res://assets_hd2d/props/fence.png",
+	"watertank": "res://assets_hd2d/props/watertank.png",
+	"debris": "res://assets_hd2d/props/debris.png",
+	"solar": "res://assets_hd2d/props/solar.png",
+	"bench": "res://assets_hd2d/props/bench.png",
 }
 const RESOURCE_ORDER := ["food", "water", "power", "medicine", "morale", "threat"]
 const RESOURCE_LABELS := {
@@ -88,6 +99,7 @@ func _ready() -> void:
 	_setup_runtime_ui()
 	_setup_network()
 	_spawn_buildings()
+	_spawn_props()
 	_spawn_characters()
 	_set_realtime_clock()
 	_update_characters(0.0)
@@ -390,21 +402,24 @@ func _open_sheet(kind: int, payload := {}) -> void:
 	sheet_panel.visible = true
 	_populate_sheet(kind, payload)
 	var vp_h := get_viewport().get_visible_rect().size.y
-	var height := max(360.0, vp_h * SHEET_HEIGHT_RATIO)
-	sheet_panel.offset_top = 0
-	sheet_panel.offset_bottom = height
-	sheet_panel.position.y = height
+	var height := maxf(360.0, vp_h * SHEET_HEIGHT_RATIO)
+	var dock_off := 66.0 + _safe_bottom()
+	# 底部抽屉：贴着 dock 上沿，从屏幕下方滑入
+	sheet_panel.offset_top = -dock_off - height
+	sheet_panel.offset_bottom = -dock_off
+	var final_y := vp_h - dock_off - height
+	sheet_panel.position.y = vp_h
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(sheet_panel, "position:y", 0.0, 0.22)
+	tween.tween_property(sheet_panel, "position:y", final_y, 0.22)
 
 func _close_sheet() -> void:
 	if not sheet_panel.visible:
 		return
-	var height := sheet_panel.size.y
+	var vp_h := get_viewport().get_visible_rect().size.y
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(sheet_panel, "position:y", height, 0.18)
+	tween.tween_property(sheet_panel, "position:y", vp_h, 0.18)
 	tween.tween_callback(func():
 		sheet_panel.visible = false
 		sheet_overlay.visible = false
@@ -562,13 +577,15 @@ func _build_tiled_ground() -> void:
 			mesh.size = Vector2(2.0, 2.0)
 			inst.mesh = mesh
 			inst.position = Vector3(-5.0 + x * 2.0, 0.0, -7.0 + z * 2.0)
-			inst.rotation.y = float((x * 17 + z * 31) % 4) * PI * 0.5
+			var rocky := (x * 73 + z * 137 + 11) % 4 == 0
+			# 土地砖统一 UV 保持边缘无缝；碎石砖是"补丁"，随机旋转打破重复
+			if rocky:
+				inst.rotation.y = float((x * 17 + z * 31) % 4) * PI * 0.5
 			var mat := StandardMaterial3D.new()
-			mat.albedo_texture = tex if (x + z) % 2 == 0 else tex2
+			mat.albedo_texture = tex2 if rocky else tex
 			mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 			mat.roughness = 1.0
-			mat.uv1_offset = Vector3(float((x + z) % 3) * 0.17, float((x * 2 + z) % 3) * 0.17, 0.0)
-			mat.uv1_scale = Vector3(0.72, 0.72, 1.0)
+			mat.uv1_scale = Vector3(1.0, 1.0, 1.0)
 			inst.material_override = mat
 			add_child(inst)
 
@@ -584,7 +601,7 @@ func _add_path(start: Vector3, end: Vector3, width: float) -> void:
 	inst.rotation.y = atan2(end.x - start.x, end.z - start.z)
 	var mat := StandardMaterial3D.new()
 	mat.albedo_texture = load(PATH_TEXTURE)
-	mat.albedo_color = Color(0.34, 0.25, 0.17, 0.78)
+	mat.albedo_color = Color(0.52, 0.42, 0.3, 0.34)
 	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	mat.roughness = 1.0
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -641,7 +658,7 @@ func _spawn_buildings() -> void:
 		sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 		sprite.alpha_cut = SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS
 		add_child(sprite)
-		var shadow := _add_shadow(sprite, Vector2(1.4, 0.58) * float(data.get("scale", 1.0)), 0.012)
+		var shadow := _add_shadow(sprite, Vector2(1.15, 0.48) * float(data.get("scale", 1.0)), 0.012)
 		var light := _add_building_light(_vec2_to_world(data.get("position", [0, 0]), 0.75), data.get("id", ""))
 		buildings[data.get("id", sprite.name)] = {"sprite": sprite, "shadow": shadow, "light": light, "data": data}
 
@@ -664,12 +681,14 @@ func _spawn_characters() -> void:
 		sprite.alpha_cut = SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS
 		add_child(sprite)
 
-		var label := _make_label3d(data.get("name", ""), 30, Color(1.0, 0.88, 0.58))
+		var label := _make_label3d(data.get("name", ""), 52, Color(1.0, 0.88, 0.58))
 		add_child(label)
-		var bubble := _make_label3d("", 25, Color(1.0, 0.96, 0.84))
+		var bubble := _make_label3d("", 60, Color(1.0, 0.96, 0.84))
 		bubble.visible = false
 		bubble.outline_size = 14
 		bubble.outline_modulate = Color(0.025, 0.022, 0.018, 0.92)
+		bubble.width = 420.0
+		bubble.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		add_child(bubble)
 		var shadow := _add_shadow(sprite, Vector2(0.52, 0.24), 0.011)
 
@@ -686,8 +705,25 @@ func _spawn_characters() -> void:
 			"bob": randf() * TAU,
 		}
 
+func _spawn_props() -> void:
+	for data in world_state.get("props", []):
+		var texture_path: String = PROP_TEXTURES.get(data.get("texture", ""), "")
+		if texture_path == "":
+			continue
+		var texture: Texture2D = load(texture_path)
+		var sprite := Sprite3D.new()
+		sprite.name = "Prop_" + str(data.get("texture", ""))
+		sprite.texture = texture
+		sprite.pixel_size = _pixel_size(data)
+		sprite.position = _vec2_to_world(data.get("position", [0, 0]), 0.02) + Vector3(0, _sprite_half_height(texture, sprite.pixel_size), 0)
+		sprite.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+		sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		sprite.alpha_cut = SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS
+		add_child(sprite)
+		_add_shadow(sprite, Vector2(0.55, 0.22) * float(data.get("scale", 1.0)), 0.01)
+
 func _pixel_size(data: Dictionary) -> float:
-	var density := max(0.001, float(data.get("density", 1.0)))
+	var density := maxf(0.001, float(data.get("density", 1.0)))
 	return (1.0 / PIXELS_PER_UNIT / density) * float(data.get("scale", 1.0))
 
 func _make_label3d(text: String, size: int, color: Color) -> Label3D:
@@ -711,7 +747,7 @@ func _add_shadow(sprite: Sprite3D, size: Vector2, y: float) -> MeshInstance3D:
 	shadow.rotation_degrees.x = -90.0
 	shadow.position = Vector3(sprite.position.x, y, sprite.position.z)
 	var gradient := Gradient.new()
-	gradient.set_color(0, Color(0.0, 0.0, 0.0, 0.42))
+	gradient.set_color(0, Color(0.0, 0.0, 0.0, 0.26))
 	gradient.set_color(1, Color(0.0, 0.0, 0.0, 0.0))
 	var gradient_tex := GradientTexture2D.new()
 	gradient_tex.gradient = gradient
@@ -981,16 +1017,17 @@ func _update_lighting(delta: float) -> void:
 	var night := t >= 20.0 or t < 6.0
 	var flicker := 0.08 * sin(Time.get_ticks_msec() * 0.006)
 	for light in building_lights:
-		light.light_energy = (0.95 + flicker) if night else 0.0
+		light.light_energy = (0.5 + flicker) if night else 0.0
 	if camp_glow != null:
-		camp_glow.light_energy = (1.0 + flicker * 1.8) if night else 0.18
+		camp_glow.light_energy = (0.65 + flicker * 1.8) if night else 0.18
 
 func _light_keyframe(hour: float) -> Dictionary:
 	var keys := [
 		{"h": 5.0, "sun_color": Color(1.0, 0.55, 0.28), "sun_energy": 1.6, "ambient": Color(0.34, 0.25, 0.22), "background": Color(0.15, 0.12, 0.16), "sun_rot": Vector3(-34, -62, 0)},
-		{"h": 12.0, "sun_color": Color(1.0, 0.9, 0.76), "sun_energy": 2.2, "ambient": Color(0.45, 0.39, 0.3), "background": Color(0.19, 0.22, 0.25), "sun_rot": Vector3(-62, -35, 0)},
+		{"h": 12.0, "sun_color": Color(1.0, 0.94, 0.84), "sun_energy": 1.85, "ambient": Color(0.42, 0.4, 0.36), "background": Color(0.19, 0.22, 0.25), "sun_rot": Vector3(-62, -35, 0)},
 		{"h": 18.0, "sun_color": Color(1.0, 0.42, 0.22), "sun_energy": 1.8, "ambient": Color(0.32, 0.21, 0.2), "background": Color(0.18, 0.11, 0.13), "sun_rot": Vector3(-24, 38, 0)},
-		{"h": 21.0, "sun_color": Color(0.52, 0.48, 0.95), "sun_energy": 0.5, "ambient": Color(0.12, 0.13, 0.25), "background": Color(0.035, 0.04, 0.08), "sun_rot": Vector3(-45, 120, 0)},
+		{"h": 21.0, "sun_color": Color(0.42, 0.55, 1.0), "sun_energy": 0.38, "ambient": Color(0.13, 0.18, 0.33), "background": Color(0.025, 0.035, 0.08), "sun_rot": Vector3(-45, 120, 0)},
+		{"h": 27.5, "sun_color": Color(0.42, 0.55, 1.0), "sun_energy": 0.38, "ambient": Color(0.13, 0.18, 0.33), "background": Color(0.025, 0.035, 0.08), "sun_rot": Vector3(-45, 120, 0)},
 		{"h": 29.0, "sun_color": Color(1.0, 0.55, 0.28), "sun_energy": 1.6, "ambient": Color(0.34, 0.25, 0.22), "background": Color(0.15, 0.12, 0.16), "sun_rot": Vector3(-34, -62, 0)},
 	]
 	var wrapped := hour if hour >= 5.0 else hour + 24.0
@@ -1067,7 +1104,7 @@ func _clamp_camera() -> void:
 func _select_world_item(screen_pos: Vector2) -> void:
 	var best_type := ""
 	var best_key := ""
-	var pick_radius := max(52.0, get_viewport().get_visible_rect().size.x * 0.13)
+	var pick_radius := maxf(52.0, get_viewport().get_visible_rect().size.x * 0.13)
 	var best_dist := pick_radius
 	for key in characters:
 		var sprite: Sprite3D = characters[key]["sprite"]

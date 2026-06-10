@@ -1,0 +1,50 @@
+[
+  {
+    "prompt": "用GPTImage2进行创作。Pixel art character sprite sheet, 4 columns x 4 rows of equal square cells, the SAME character in all 16 cells. Character: elderly male engineer, messy white hair, goggles pushed up on forehead, brown canvas work coat, holding a wrench. Row 1: idle animation facing viewer. Row 2: walking toward viewer (down). Row 3: walking to the right (side view). Row 4: walking away from viewer (up). 4-frame smooth walk cycle per row, identical proportions in every cell, full body always inside its cell with margin. Octopath Traveler inspired HD-2D pixel art, post-apocalyptic survivor camp theme. Muted warm palette: dusty brown, rust orange, faded olive, weathered grey-teal accent. Crisp clean pixel clusters, readable silhouette, light from upper-left. Flat solid magenta #ff00ff background ONLY, no ground shadow, no text, no watermark, no grid lines.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/engineer_walk_sheet.png"
+  },
+  {
+    "prompt": "用GPTImage2进行创作。Pixel art character sprite sheet, 4 columns x 4 rows of equal square cells, the SAME character in all 16 cells. Character: young female scientist, short dark hair, round glasses, white lab coat worn open over olive field gear, holding a small handheld scanner. Row 1: idle animation facing viewer. Row 2: walking toward viewer (down). Row 3: walking to the right (side view). Row 4: walking away from viewer (up). 4-frame smooth walk cycle per row, identical proportions in every cell, full body always inside its cell with margin. Octopath Traveler inspired HD-2D pixel art, post-apocalyptic survivor camp theme. Muted warm palette: dusty brown, rust orange, faded olive, weathered grey-teal accent. Crisp clean pixel clusters, readable silhouette, light from upper-left. Flat solid magenta #ff00ff background ONLY, no ground shadow, no text, no watermark, no grid lines.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/scientist_walk_sheet.png"
+  },
+  {
+    "prompt": "用GPTImage2进行创作。Pixel art character sprite sheet, 4 columns x 4 rows of equal square cells, the SAME character in all 16 cells. Character: rugged male scavenger, weathered cap, red scarf, bulky backpack, utility vest, work gloves. Row 1: idle animation facing viewer. Row 2: walking toward viewer (down). Row 3: walking to the right (side view). Row 4: walking away from viewer (up). 4-frame smooth walk cycle per row, identical proportions in every cell, full body always inside its cell with margin. Octopath Traveler inspired HD-2D pixel art, post-apocalyptic survivor camp theme. Muted warm palette: dusty brown, rust orange, faded olive, weathered grey-teal accent. Crisp clean pixel clusters, readable silhouette, light from upper-left. Flat solid magenta #ff00ff background ONLY, no ground shadow, no text, no watermark, no grid lines.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/scavenger_walk_sheet.png"
+  },
+  {
+    "prompt": "用GPTImage2进行创作。Pixel art game building sprite, ONE single building centered on flat magenta #ff00ff background. Building: tall makeshift short-wave radio tower built from scrap steel lattice, standing on a small corrugated-iron shack base, one satellite dish mounted on the side, small red beacon light on top, rust streaks and patched metal plates. 3/4 top-down view at about 30 degrees, front face and roof visible, designed to sit on flat terrain. Octopath Traveler inspired HD-2D pixel art, post-apocalyptic survivor camp theme. Muted warm palette: dusty brown, rust orange, faded olive, weathered grey-teal accent. Crisp clean pixel clusters, readable silhouette, light from upper-left. No ground shadow, no text, no watermark.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/b0_radio.png"
+  },
+  {
+    "prompt": "用GPTImage2进行创作。Pixel art game building sprite, ONE single building centered on flat magenta #ff00ff background. Building: survivor greenhouse with rusty steel frame and glass panels, a few cracked panes patched with tape and plastic sheets, rows of green crops faintly visible inside, small water barrel by the door. 3/4 top-down view at about 30 degrees, front face and roof visible, designed to sit on flat terrain. Octopath Traveler inspired HD-2D pixel art, post-apocalyptic survivor camp theme. Muted warm palette: dusty brown, rust orange, faded olive, weathered grey-teal accent. Crisp clean pixel clusters, readable silhouette, light from upper-left. No ground shadow, no text, no watermark.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/b1_greenhouse.png"
+  },
+  {
+    "prompt": "用GPTImage2进行创作。Pixel art game building sprite, ONE single building centered on flat magenta #ff00ff background. Building: low squat concrete survival bunker, heavy steel blast door, sandbag wall around the entrance, two ventilation pipes on the roof, cracked concrete with moss stains. 3/4 top-down view at about 30 degrees, front face and roof visible, designed to sit on flat terrain. Octopath Traveler inspired HD-2D pixel art, post-apocalyptic survivor camp theme. Muted warm palette: dusty brown, rust orange, faded olive, weathered grey-teal accent. Crisp clean pixel clusters, readable silhouette, light from upper-left. No ground shadow, no text, no watermark.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/b2_bunker.png"
+  },
+  {
+    "prompt": "用GPTImage2进行创作。Pixel art game building sprite, ONE single building centered on flat magenta #ff00ff background. Building: wooden watchtower on four stilts, rope-bound ladder, tarp canopy roof, small searchlight and an old bell mounted on the platform railing. 3/4 top-down view at about 30 degrees, front face and platform visible, designed to sit on flat terrain. Octopath Traveler inspired HD-2D pixel art, post-apocalyptic survivor camp theme. Muted warm palette: dusty brown, rust orange, faded olive, weathered grey-teal accent. Crisp clean pixel clusters, readable silhouette, light from upper-left. No ground shadow, no text, no watermark.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/b3_watchtower.png"
+  },
+  {
+    "prompt": "用GPTImage2进行创作。Pixel art game building sprite, ONE single building centered on flat magenta #ff00ff background. Building: makeshift communal kitchen shack, corrugated iron roof with a stove chimney pipe, open wooden counter with hanging pots and pans, barrel stove, crates of vegetables, warm and lived-in feeling. 3/4 top-down view at about 30 degrees, front face and roof visible, designed to sit on flat terrain. Octopath Traveler inspired HD-2D pixel art, post-apocalyptic survivor camp theme. Muted warm palette: dusty brown, rust orange, faded olive, weathered grey-teal accent. Crisp clean pixel clusters, readable silhouette, light from upper-left. No ground shadow, no text, no watermark.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/b4_kitchen.png"
+  },
+  {
+    "prompt": "用GPTImage2进行创作。Seamless tileable pixel art ground texture, straight top-down view, full square image with no background. Cracked dry earth with sparse dead grass tufts and tiny pebbles, details evenly distributed, NO large landmark features so it tiles seamlessly in all four directions. Octopath Traveler inspired HD-2D pixel art. Muted dusty brown and faded olive palette, crisp pixel clusters. No text, no watermark, no border, no vignette.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/ground_dirt.png"
+  },
+  {
+    "prompt": "用GPTImage2进行创作。Seamless tileable pixel art ground texture, straight top-down view, full square image with no background. Dry wasteland earth with scattered flat grey rock slabs, gravel patches and a few rust-orange pebbles, details evenly distributed, NO large landmark features so it tiles seamlessly in all four directions. Octopath Traveler inspired HD-2D pixel art. Muted dusty brown, grey and faded olive palette, crisp pixel clusters. No text, no watermark, no border, no vignette.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/ground_rocky.png"
+  },
+  {
+    "prompt": "用GPTImage2进行创作。Seamless vertically-tileable pixel art dirt road texture, straight top-down view, full square image with no background. A packed-earth path running straight from top edge to bottom edge of the image, with wheel ruts, footprints and small stones, soft irregular edges blending into dry dirt on both sides. Must tile seamlessly when repeated vertically. Octopath Traveler inspired HD-2D pixel art. Muted dusty brown palette, crisp pixel clusters. No text, no watermark, no border.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/ground_path.png"
+  },
+  {
+    "prompt": "用GPTImage2进行创作。Pixel art prop sprite sheet for a game, 8 separate props arranged in 2 rows x 4 columns of equal cells on flat magenta #ff00ff background. Props in order: rusty oil barrel, stack of wooden crates, small campfire with stones and low flame, scrap-metal fence segment, water tank on a wooden stand, debris pile with old tires, solar panel on a tilted frame, simple wooden bench. Each prop centered in its own cell with margin, same 3/4 top-down view at about 30 degrees, same scale relative to each other. Octopath Traveler inspired HD-2D pixel art, post-apocalyptic survivor camp theme. Muted warm palette: dusty brown, rust orange, faded olive, weathered grey-teal accent. Crisp pixel clusters, light from upper-left. No ground shadow, no text, no watermark, no grid lines.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/v2/props_sheet.png"
+  }
+]

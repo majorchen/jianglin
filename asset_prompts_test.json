@@ -1,0 +1,6 @@
+[
+  {
+    "prompt": "HD-2D inspired isometric pixel art sprite sheet. Older engineer, goggles, brown jacket, wrench. 4 columns x 4 rows, equal cells. Rows: idle, walk down, walk side, walk up. Mobile game map-scale character, not portrait. Flat solid #ff00ff background only, no shadow, no text.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/engineer_walk_sheet.png"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "prompt": "HD-2D inspired isometric pixel art sprite sheet. Young scientist woman, short dark hair, white lab coat, small field scanner. 4 columns x 4 rows, equal cells. Rows: idle, walk down, walk side, walk up. Mobile game map-scale character, not portrait. Flat solid #ff00ff background only, no shadow, no text.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/scientist_walk_sheet.png"
+  },
+  {
+    "prompt": "HD-2D inspired isometric pixel art sprite sheet. Rugged scavenger man, cap, red scarf, backpack, utility vest. 4 columns x 4 rows, equal cells. Rows: idle, walk down, walk side, walk up. Mobile game map-scale character, not portrait. Flat solid #ff00ff background only, no shadow, no text.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/scavenger_walk_sheet.png"
+  },
+  {
+    "prompt": "HD-2D inspired isometric pixel art building sprite sheet for a mobile post-apocalyptic town. 5 separate assets in one row: radio tower, greenhouse, concrete bunker, wooden watchtower, kitchen shack. Same camera angle, same scale, clean silhouettes. Flat solid #ff00ff background only, no shadows, no text.",
+    "output": "E:/claude-workspace/jianglin/assets_hd2d/raw/buildings_hd2d_sheet.png"
+  }
+]
