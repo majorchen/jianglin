@@ -117,6 +117,22 @@ def process_terrain(path: Path, size: int) -> Image.Image:
     return img.resize((size, size), Image.NEAREST)
 
 
+def match_tone(src: Image.Image, ref: Image.Image) -> Image.Image:
+    """把 src 的每通道均值/方差迁移到 ref 的分布——不同地形砖拼接时色调统一"""
+    from PIL import ImageStat
+    src_rgb = src.convert("RGB")
+    s_stat = ImageStat.Stat(src_rgb)
+    r_stat = ImageStat.Stat(ref.convert("RGB"))
+    bands = src_rgb.split()
+    out_bands = []
+    for i, band in enumerate(bands):
+        s_mean, s_std = s_stat.mean[i], max(s_stat.stddev[i], 1.0)
+        r_mean, r_std = r_stat.mean[i], r_stat.stddev[i]
+        out_bands.append(band.point(lambda v, sm=s_mean, ss=s_std, rm=r_mean, rs=r_std:
+                                    int(min(255, max(0, (v - sm) / ss * rs + rm)))))
+    return Image.merge("RGB", out_bands)
+
+
 def process_props(path: Path) -> dict:
     img = chroma_key(Image.open(path))
     out = {}
@@ -188,6 +204,12 @@ def main():
             results["terrain/" + out_name] = process_terrain(p, size)
         else:
             missing.append(raw_name)
+    # 以 ground_dirt 为基准统一其他地形砖的色调，消除拼接色差
+    ref = results.get("terrain/ground_dirt.png")
+    if ref is not None:
+        for key in ("terrain/ground_rocky.png", "terrain/ground_path.png"):
+            if key in results:
+                results[key] = match_tone(results[key], ref)
 
     p = RAW / PROPS_SHEET
     if p.exists():

@@ -577,15 +577,13 @@ func _build_tiled_ground() -> void:
 			mesh.size = Vector2(2.0, 2.0)
 			inst.mesh = mesh
 			inst.position = Vector3(-5.0 + x * 2.0, 0.0, -7.0 + z * 2.0)
-			var rocky := (x * 73 + z * 137 + 11) % 4 == 0
-			# 土地砖统一 UV 保持边缘无缝；碎石砖是"补丁"，随机旋转打破重复
-			if rocky:
-				inst.rotation.y = float((x * 17 + z * 31) % 4) * PI * 0.5
+			var rocky := (x * 73 + z * 137 + 11) % 6 == 0
 			var mat := StandardMaterial3D.new()
 			mat.albedo_texture = tex2 if rocky else tex
 			mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 			mat.roughness = 1.0
-			mat.uv1_scale = Vector3(1.0, 1.0, 1.0)
+			# 镜像平铺：相邻砖 UV 翻转，边缘像素严格对齐，不依赖纹理真无缝
+			mat.uv1_scale = Vector3(-1.0 if x % 2 == 1 else 1.0, -1.0 if z % 2 == 1 else 1.0, 1.0)
 			inst.material_override = mat
 			add_child(inst)
 
