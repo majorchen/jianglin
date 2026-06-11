@@ -1,0 +1,35 @@
+{
+  "door_height_uv": 0.043,
+  "char_scale_far": 0.85,
+  "char_scale_near": 1.12,
+  "spots": {
+    "radio_door": [0.24, 0.41],
+    "greenhouse_door": [0.47, 0.34],
+    "bunker_door": [0.70, 0.27],
+    "watch_base": [0.76, 0.62],
+    "kitchen_front": [0.48, 0.65],
+    "campfire": [0.26, 0.69],
+    "garden": [0.61, 0.76],
+    "gate": [0.22, 0.87]
+  },
+  "paths": [
+    ["radio_door", "greenhouse_door"],
+    ["greenhouse_door", "bunker_door"],
+    ["greenhouse_door", "kitchen_front"],
+    ["bunker_door", "watch_base"],
+    ["watch_base", "kitchen_front"],
+    ["kitchen_front", "campfire"],
+    ["radio_door", "campfire"],
+    ["campfire", "gate"],
+    ["kitchen_front", "garden"],
+    ["garden", "gate"]
+  ],
+  "buildings": {
+    "radio":      { "click_rect": [0.06, 0.08, 0.34, 0.44], "light": [0.22, 0.33] },
+    "greenhouse": { "click_rect": [0.34, 0.18, 0.64, 0.36], "light": [0.49, 0.27] },
+    "bunker":     { "click_rect": [0.60, 0.14, 0.84, 0.31], "light": [0.70, 0.23] },
+    "watch":      { "click_rect": [0.66, 0.40, 0.88, 0.64], "light": [0.76, 0.50] },
+    "kitchen":    { "click_rect": [0.30, 0.47, 0.67, 0.67], "light": [0.48, 0.58] }
+  },
+  "occluders": []
+}

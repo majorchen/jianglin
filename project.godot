@@ -12,7 +12,7 @@ config_version=5
 config/name="Jianglin"
 config/description="降临——社群可视化互动世界"
 config/version="0.1.0"
-run/main_scene="res://scenes/main_hd2d.tscn"
+run/main_scene="res://scenes/main_2d.tscn"
 config/features=PackedStringArray("4.5")
 config/icon="res://assets/ui-elements.png"
 
